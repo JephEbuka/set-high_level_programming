@@ -1,0 +1,3 @@
+#!/bin/bash
+echo "Compiling $PYFILE ..."
+python3 -c 'import os, py_compile; f = os.environ["PYFILE"]; py_compile.compile(f, cfile=f + "c", doraise=True)'
