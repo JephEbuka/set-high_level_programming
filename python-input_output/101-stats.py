@@ -1,37 +1,53 @@
 #!/usr/bin/python3
-"""Read log lines from stdin and compute file-size and status metrics."""
+"""Reads stdin line by line and computes metrics."""
 import sys
 
-VALID_CODES = ("200", "301", "400", "401", "403", "404", "405", "500")
+status_codes = {
+    "200": 0,
+    "301": 0,
+    "400": 0,
+    "401": 0,
+    "403": 0,
+    "404": 0,
+    "405": 0,
+    "500": 0
+}
+
 total_size = 0
-status_counts = {code: 0 for code in VALID_CODES}
 line_count = 0
 
 
 def print_stats():
-    """Print accumulated file-size and HTTP status statistics."""
+    """Print accumulated statistics."""
     print("File size: {}".format(total_size))
-    for code in VALID_CODES:
-        if status_counts[code]:
-            print("{}: {}".format(code, status_counts[code]))
+
+    for code in sorted(status_codes):
+        if status_codes[code] > 0:
+            print("{}: {}".format(code, status_codes[code]))
 
 
 try:
     for line in sys.stdin:
         line_count += 1
         parts = line.split()
-        if len(parts) >= 2:
-            try:
-                total_size += int(parts[-1])
-            except (ValueError, TypeError):
-                pass
 
+        try:
+            total_size += int(parts[-1])
+        except (ValueError, IndexError):
+            pass
+
+        try:
             status = parts[-2]
-            if status in status_counts:
-                status_counts[status] += 1
+            if status in status_codes:
+                status_codes[status] += 1
+        except IndexError:
+            pass
 
         if line_count % 10 == 0:
             print_stats()
+
 except KeyboardInterrupt:
+    pass
+
+finally:
     print_stats()
-    raise
