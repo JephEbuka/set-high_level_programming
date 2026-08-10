@@ -1,7 +1,13 @@
 #!/usr/bin/python3
 """Module for multiplying two matrices."""
 
+
 def matrix_mul(m_a, m_b):
+    """Multiply two matrices after validation."""
+    if not isinstance(m_a, list):
+        raise TypeError("m_a must be a list")
+    if not isinstance(m_b, list):
+        raise TypeError("m_b must be a list")
     """Multiply two matrices after validation."""
     if not isinstance(m_a, list):
         raise TypeError("m_a must be a list")
