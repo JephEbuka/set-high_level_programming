@@ -1,0 +1,7 @@
+__pycache__/
+*.py[cod]
+*-main.py
+Rectangle.json
+Square.json
+Rectangle.csv
+Square.csv
