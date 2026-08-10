@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+*-main.py
+*-main_2.py
+101-generator.py
+my_file_0.txt
+my_first_file.txt
+file_append.txt
+my_list.json
+my_dict.json
+my_set.json
+my_fake.json
+add_item.json
+student.json
+append_after_100.txt
